@@ -8,6 +8,6 @@ namespace CintaAPI.Modelos
         public string GlobalId { get; set; }
         public string Descripcion { get; set; } = "Bulto sin descripción";
         public DateTime Fecha { get; set; } = DateTime.Now;
-        public DateTime FechaHoraPrensado { get; set; } 
+        public string Estado { get; set; }
     }
 }

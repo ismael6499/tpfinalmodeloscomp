@@ -20,12 +20,12 @@ namespace PrensaAPI.Controllers
     [ApiController]
     public class PrensaController : ControllerBase
     {
-        private readonly Prensa prensa;
+        private readonly PrensaService _prensaService;
         private readonly Control control;
 
-        public PrensaController(Prensa prensa, Control control)
+        public PrensaController(PrensaService prensaService, Control control)
         {
-            this.prensa = prensa;
+            this._prensaService = prensaService;
             this.control = control;
         }
 
@@ -34,7 +34,7 @@ namespace PrensaAPI.Controllers
         public string Estado()
         {
             Logger.GetInstance().WriteLog("Verificando estado de la prensa");
-            string jsonSeñal = prensa.verificarEstado("$levantado$");
+            string jsonSeñal = _prensaService.verificarEstado("$levantado$");
             Logger.GetInstance().WriteLog(jsonSeñal);
             return jsonSeñal;
         }
@@ -44,7 +44,7 @@ namespace PrensaAPI.Controllers
         public bool Libre()
         {
             Logger.GetInstance().WriteLog("Consultando si la prensa está libre");
-            bool isLibre = prensa.consultarSensorLibre();
+            bool isLibre = _prensaService.consultarSensorLibre();
             return isLibre;
         }
 
@@ -54,7 +54,7 @@ namespace PrensaAPI.Controllers
         {
             string jsonString = body.ToString();
             Bulto bulto = JsonConvert.DeserializeObject<Bulto>(jsonString);
-            Bulto bultoPrensado = await prensa.Prensar(bulto);
+            Bulto bultoPrensado = await _prensaService.Prensar(bulto);
             string msjAgregadoPila  = control.llevarBultoALaPila(bultoPrensado);
             string respuesta = bultoPrensado.GlobalId + " - Prensado - " + msjAgregadoPila;
             Logger.GetInstance().WriteLog(respuesta);

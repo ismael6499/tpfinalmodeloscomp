@@ -27,7 +27,7 @@ namespace PilaDeBultosAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton(new PilaDeBultos());
+            services.AddSingleton(new PilaDeBultosService());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PilaDeBultosAPI", Version = "v1" });

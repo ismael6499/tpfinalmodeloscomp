@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CintaAPI.Data;
-using CintaAPI.Modelos;
+﻿using CintaAPI.Modelos;
+using CintaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace CintaAPI.Controllers
@@ -14,10 +9,10 @@ namespace CintaAPI.Controllers
     public class CintaController : ControllerBase
     {
 
-        private Cinta mCinta;
-        public CintaController(Modelos.Cinta cinta)
+        private CintaService _mCintaService;
+        public CintaController(CintaService cintaService)
         {
-            this.mCinta = cinta;
+            this._mCintaService = cintaService;
         }
 
 
@@ -27,7 +22,7 @@ namespace CintaAPI.Controllers
         {
             string jsonString = body.ToString();
             Bulto bulto = JsonConvert.DeserializeObject<Bulto>(jsonString);
-            mCinta.ponerBulto(bulto);
+            _mCintaService.ponerBulto(bulto);
             return JsonConvert.SerializeObject(bulto);
         }
     }

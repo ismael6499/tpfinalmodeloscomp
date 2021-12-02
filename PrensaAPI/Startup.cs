@@ -28,7 +28,7 @@ namespace PrensaAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton(new Prensa());
+            services.AddSingleton(new PrensaService());
             services.AddSingleton(new Control());
             services.AddSwaggerGen(c =>
             {

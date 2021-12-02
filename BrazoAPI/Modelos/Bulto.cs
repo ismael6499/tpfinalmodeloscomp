@@ -1,13 +1,13 @@
 using System;
+using BrazoAPI.Modelos;
 
 namespace BrazoAPI
 {
-    public class Bulto
+    public class Bulto : Entidad
     {
-        public int Id { get; set; } = 0;
-        public string GlobalId { get; set; }
         public string Descripcion { get; set; } = "Bulto sin descripción";
+        public string GlobalId { get; set; }
         public DateTime Fecha { get; set; } = DateTime.Now;
-        public DateTime FechaHoraPrensado { get; set; }
+        public string Estado { get; set; }
     }
 }

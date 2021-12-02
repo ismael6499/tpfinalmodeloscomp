@@ -1,34 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Data;
-using WebAppGUI.DataMapper;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using WebAppGUI.Data;
 using WebAppGUI.Modelos;
+using WebAppGUI.Services;
 
 namespace WebAppGUI.Controllers
 {
     public class CintaController : Controller
     {
-        private CintaMapper mapper;
-
-        public CintaController()
-        {
-            mapper = new CintaMapper();
-        }
-
         public ActionResult Index()
         {
-            List<Cinta> listado = mapper.Listar();
+            var jsonListaCinta = ApiGatewayClient.MakeGet("cinta/getall");
+            List<Cinta> lista = JsonConvert.DeserializeObject<List<Cinta>>(jsonListaCinta);
 
-            return View(listado);
+            Logger.GetInstance().WriteLog("Consultando cinta/getall");
+            return View(lista);
         }
 
         public ActionResult Details(int id)
         {
-            var entidad = mapper.Get(id);
+            var jsonCinta = ApiGatewayClient.MakeGet($"cinta/get/{id}");
+            var entidad = JsonConvert.DeserializeObject<Cinta>(jsonCinta);
+            Logger.GetInstance().WriteLog($"Consultando cinta/get/{id}");
+
             return View(entidad);
         }
 
@@ -42,20 +38,23 @@ namespace WebAppGUI.Controllers
         {
             try
             {
-                mapper.Agregar(cinta);
+                ApiGatewayClient.MakePost($"cinta/create", cinta);
+                Logger.GetInstance().WriteLog($"Creando cinta");
+
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                ModelState.AddModelError("",e.Message);
-
+                ModelState.AddModelError("", e.Message);
                 return View();
             }
         }
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var jsonCinta = ApiGatewayClient.MakeGet($"cinta/get/{id}");
+            var entidad = JsonConvert.DeserializeObject<Cinta>(jsonCinta);
+            return View(entidad);
         }
 
         [HttpPost]
@@ -63,12 +62,13 @@ namespace WebAppGUI.Controllers
         {
             try
             {
-                mapper.Actualizar(cinta);
+                ApiGatewayClient.MakePost($"cinta/edit", cinta);
+                Logger.GetInstance().WriteLog($"Editando cinta");
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                ModelState.AddModelError("",e.Message);
+                ModelState.AddModelError("", e.Message);
 
                 return View();
             }
@@ -76,7 +76,8 @@ namespace WebAppGUI.Controllers
 
         public ActionResult Delete(int id)
         {
-            var entidad = mapper.Get(id);
+            var jsonCinta = ApiGatewayClient.MakeGet($"cinta/get/{id}");
+            var entidad = JsonConvert.DeserializeObject<Cinta>(jsonCinta);
             return View(entidad);
         }
 
@@ -85,12 +86,13 @@ namespace WebAppGUI.Controllers
         {
             try
             {
-                mapper.Eliminar(cinta);
+                ApiGatewayClient.MakePost($"cinta/delete", cinta);
+                Logger.GetInstance().WriteLog($"Eliminando cinta");
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                ModelState.AddModelError("",e.Message);
+                ModelState.AddModelError("", e.Message);
 
                 return View();
             }

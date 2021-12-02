@@ -12,8 +12,8 @@ namespace BrazoAPI
         {
             configuration = CreateConfiguration(args);
 
-            Brazo brazo = new Brazo();
-            brazo.init(configuration);
+            BrazoService brazoService = new BrazoService();
+            brazoService.init(configuration);
         }
 
        

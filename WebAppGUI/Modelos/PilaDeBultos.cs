@@ -15,7 +15,6 @@ namespace WebAppGUI.Modelos
 
         public bool Conectado { get; set; }
 
-        public DateTime UltimaActividad { get; set; }
 
         public List<Bulto> Bultos { get; set; }
 

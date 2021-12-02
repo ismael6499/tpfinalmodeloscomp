@@ -18,7 +18,6 @@ namespace WebAppGUI.Modelos
 
         public bool Encendido { get; set; }
 
-        public DateTime UltimaActividad { get; set; }
 
 
     }
