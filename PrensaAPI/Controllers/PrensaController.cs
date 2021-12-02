@@ -66,7 +66,6 @@ namespace PrensaAPI.Controllers
             if (!_prensaService.Encendida) return "off";
             Logger.GetInstance().WriteLog("Verificando estado de la prensa");
             string jsonSeñal = _prensaService.verificarEstado("$levantado$");
-            Logger.GetInstance().WriteLog(jsonSeñal);
             return jsonSeñal;
         }
 

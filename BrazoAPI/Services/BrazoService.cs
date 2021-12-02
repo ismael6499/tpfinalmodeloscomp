@@ -15,10 +15,12 @@ namespace BrazoAPI
     {
         List<string> listaBultosJson = new List<string>();
 
-        public bool Encendido { get; set; }
+        public bool Encendido { get; set; } = true;
 
         private IConnection connection;
         private IConfiguration configuration;
+        private EventingBasicConsumer consumidor;
+        private IModel canalReceiver;
 
 
         public void init(IConfiguration configuration)
@@ -31,12 +33,12 @@ namespace BrazoAPI
             var factory = new ConnectionFactory() { HostName = urlRabbit };
 
             connection = factory.CreateConnection();
-            IModel canalReceiver = connection.CreateModel();
+            canalReceiver = connection.CreateModel();
 
             canalReceiver.QueueDeclare(queue: "Cinta", false, false, false,
                 null);
 
-            var consumidor = new EventingBasicConsumer(canalReceiver);
+            consumidor = new EventingBasicConsumer(canalReceiver);
             consumidor.Received += (model, ea) =>
             {
                 var eaDeliveryTag = ea.DeliveryTag;
@@ -58,7 +60,6 @@ namespace BrazoAPI
 
             canalReceiver.BasicConsume(queue: "Cinta", autoAck: false, consumer: consumidor);
 
-            Console.ReadKey();
         }
 
 
@@ -70,11 +71,21 @@ namespace BrazoAPI
             bool isEncendida = checkPrensaEncendida(urlPrensa);
             if (!isEncendida)
             {
-                //todo siguiente prensa
                 Logger.GetInstance().WriteLogError("La prensa se encuentra apagada");
             }
-            bool isLibre = checkPrensaLibre(urlPrensa);
-            bool isLevantado = checkPrensaLevantada(urlPrensa);
+
+            bool isLibre = false;
+            bool isLevantado = false;
+            try
+            {
+                 isLibre = checkPrensaLibre(urlPrensa);
+                 isLevantado = checkPrensaLevantada(urlPrensa);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             if (isLibre && isLevantado)
             {
                 enviarBultoParaPrensar(bulto, urlPrensa);

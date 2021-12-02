@@ -13,7 +13,7 @@ namespace PrensaAPI.Services
     public class PrensaService
     {
         public string Estado { get; set; } = EstadoPrensaConstants.LEVANTADO;
-        public bool Encendida { get; set; }
+        public bool Encendida { get; set; } = true;
 
         public async Task<Bulto> Prensar(Bulto bulto)
         {

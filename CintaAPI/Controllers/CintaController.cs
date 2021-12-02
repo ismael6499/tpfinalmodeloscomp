@@ -37,7 +37,7 @@ namespace CintaAPI.Controllers
             var url = this.Request.Host.ToString();
             var mapper = new Mapper();
             mapper.Apagar(new Cinta(){Url = url});
-            return "Encendido";
+            return "Apagado";
         }
         
         
@@ -52,8 +52,8 @@ namespace CintaAPI.Controllers
             string jsonString = body.ToString();
             Bulto bulto = JsonConvert.DeserializeObject<Bulto>(jsonString);
             bulto.Estado = "Iniciado";
-            _mCintaService.ponerBulto(bulto);
             Logger.GetInstance().SaveBultoLog(bulto);
+            _mCintaService.ponerBulto(bulto);
             return JsonConvert.SerializeObject(bulto);
         }
     }

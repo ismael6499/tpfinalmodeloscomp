@@ -25,6 +25,7 @@ namespace WebAppGUI.Controllers
                 httpClient.BaseAddress = new Uri(urlApiGateway);
                 var response = await httpClient.PostAsJsonAsync("ponerbulto", bulto);
                 responseAsString = await response.Content.ReadAsStringAsync();
+                responseAsString = "Bulto enviando a cinta";
                 Logger.GetInstance().WriteLog("Bulto enviando a cinta");
             }
             ViewBag.response = responseAsString;

@@ -1,6 +1,7 @@
 ﻿using System;
 using BrazoAPI.Data;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Owin.Hosting;
 
 namespace BrazoAPI
 {
@@ -14,6 +15,13 @@ namespace BrazoAPI
             configuration = CreateConfiguration(args);
             brazoService = new BrazoService();
             brazoService.init(configuration);
+            
+            string url = configuration["urls:api"];
+            using (WebApp.Start<Startup>(url))
+            {
+                Console.WriteLine($"Se está ejecutando nancy en {url}");
+                Console.ReadKey();
+            }
         }
 
        
