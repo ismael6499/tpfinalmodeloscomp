@@ -50,10 +50,6 @@ namespace ApiGateway
             {
                 string url = x.url;
 
-                if (!url.Contains("http"))
-                {
-                    url = "http://" + url;
-                }
                 using (var httpClient = new HttpClient())
                 {
                     try
@@ -77,10 +73,7 @@ namespace ApiGateway
             Get("/v1/apagar/{url}", x =>
             {
                 string url = x.url;
-                if (!url.Contains("http"))
-                {
-                    url = "http://" + url;
-                }
+              
                 using (var httpClient = new HttpClient())
                 {
                     try

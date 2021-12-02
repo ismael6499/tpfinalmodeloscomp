@@ -1,18 +1,21 @@
 ﻿FROM mcr.microsoft.com/dotnet/runtime:5.0 AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Sensor.Pasivo/Sensor.Pasivo.csproj", "Sensor.Pasivo/"]
-RUN dotnet restore "Sensor.Pasivo/Sensor.Pasivo.csproj"
+COPY ["SensorPasivo/SensorPasivo.csproj", "SensorPasivo/"]
+RUN dotnet restore "SensorPasivo/SensorPasivo.csproj"
 COPY . .
-WORKDIR "/src/Sensor.Pasivo"
-RUN dotnet build "Sensor.Pasivo.csproj" -c Release -o /app/build
+WORKDIR "/src/SensorPasivo"
+RUN dotnet build "SensorPasivo.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Sensor.Pasivo.csproj" -c Release -o /app/publish
+RUN dotnet publish "SensorPasivo.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Sensor.Pasivo.dll"]
+ENTRYPOINT ["dotnet", "SensorPasivo.dll"]

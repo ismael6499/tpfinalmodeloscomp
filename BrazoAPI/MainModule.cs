@@ -23,7 +23,7 @@ namespace BrazoAPI
                 Program.brazoService.Encendido = true;
                 var url = Program.configuration["urls:api"].Replace("http://","");
                 var mapper = new Mapper();
-                mapper.Apagar(new Brazo(){Url = url});
+                mapper.Encender(new Brazo(){Url = url});
                 return "encendido";
             });
             

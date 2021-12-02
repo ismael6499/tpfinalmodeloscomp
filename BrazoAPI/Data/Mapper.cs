@@ -85,8 +85,8 @@ namespace BrazoAPI.Data
         public void Encender(Brazo model)
         {
             var sqlParameters = new SqlParameter[2];
-            sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Encendido", true);
+            sqlParameters[0] = new SqlParameter("@Url", model.Url);
+            sqlParameters[1] = new SqlParameter("@Encendido", true);
 
             db.Escribir("encender", sqlParameters);
         }
@@ -94,8 +94,8 @@ namespace BrazoAPI.Data
         public void Apagar(Brazo model)
         {
             var sqlParameters = new SqlParameter[2];
-            sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Encendido", false);
+            sqlParameters[0] = new SqlParameter("@Url", model.Url);
+            sqlParameters[1] = new SqlParameter("@Encendido", false);
 
             db.Escribir("apagar", sqlParameters);
         }

@@ -86,8 +86,8 @@ namespace CintaAPI.Data
         public void Encender(Cinta model)
         {
             var sqlParameters = new SqlParameter[2];
-            sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Encendido", true);
+            sqlParameters[0] = new SqlParameter("@Url", model.Url);
+            sqlParameters[1] = new SqlParameter("@Encendido", true);
 
             db.Escribir("encender", sqlParameters);
         }
@@ -95,8 +95,8 @@ namespace CintaAPI.Data
         public void Apagar(Cinta model)
         {
             var sqlParameters = new SqlParameter[2];
-            sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Encendido", false);
+            sqlParameters[0] = new SqlParameter("@Url", model.Url);
+            sqlParameters[1] = new SqlParameter("@Encendido", false);
 
             db.Escribir("apagar", sqlParameters);
         }

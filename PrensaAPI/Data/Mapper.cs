@@ -19,8 +19,8 @@ namespace PrensaAPI.Data
         public void Encender(Prensa model)
         {
             var sqlParameters = new SqlParameter[2];
-            sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Encendido", true);
+            sqlParameters[0] = new SqlParameter("@Url", model.Url);
+            sqlParameters[1] = new SqlParameter("@Encendido", true);
 
             db.Escribir("encender", sqlParameters);
         }
@@ -28,8 +28,8 @@ namespace PrensaAPI.Data
         public void Apagar(Prensa model)
         {
             var sqlParameters = new SqlParameter[2];
-            sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Encendido", false);
+            sqlParameters[0] = new SqlParameter("@Url", model.Url);
+            sqlParameters[1] = new SqlParameter("@Encendido", false);
 
             db.Escribir("apagar", sqlParameters);
         }

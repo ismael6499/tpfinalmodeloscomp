@@ -3,16 +3,16 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Brazo.API/Brazo.API.csproj", "Brazo.API/"]
-RUN dotnet restore "Brazo.API/Brazo.API.csproj"
+COPY ["BrazoAPI/BrazoAPI.csproj", "BrazoAPI/"]
+RUN dotnet restore "BrazoAPI/BrazoAPI.csproj"
 COPY . .
-WORKDIR "/src/Brazo.API"
-RUN dotnet build "Brazo.API.csproj" -c Release -o /app/build
+WORKDIR "/src/BrazoAPI"
+RUN dotnet build "BrazoAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Brazo.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "BrazoAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Brazo.API.dll"]
+ENTRYPOINT ["dotnet", "BrazoAPI.dll"]
