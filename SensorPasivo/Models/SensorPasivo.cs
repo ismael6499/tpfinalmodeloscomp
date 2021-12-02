@@ -14,7 +14,6 @@ namespace Sensor.Pasivo.Models
         [Required]
         public string Url { get; set; }
 
-        public bool Conectado { get; set; }
 
 
 

@@ -21,20 +21,16 @@ namespace API.Gateway.Mappers
             var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(Prensa model)
         {
-            var sqlParameters = new SqlParameter[5];
+            var sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
-            sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("actualizar", sqlParameters);
         }
@@ -50,8 +46,6 @@ namespace API.Gateway.Mappers
                 Prensa.Id = (int) fila["Id"];
                 Prensa.Nombre = fila["Nombre"].ToString();
                 Prensa.Url= fila["Url"].ToString();
-                Prensa.Conectado = (bool) fila["Conectado"];
-                Prensa.Encendido = (bool) fila["Encendido"];
                 lista.Add(Prensa);
             }
 
@@ -70,8 +64,6 @@ namespace API.Gateway.Mappers
                 Prensa.Id = (int) fila["Id"];
                 Prensa.Nombre = fila["Nombre"].ToString();
                 Prensa.Url= fila["Url"].ToString();
-                Prensa.Conectado = (bool) fila["Conectado"];
-                Prensa.Encendido = (bool) fila["Encendido"];
                 return Prensa;
             }
 

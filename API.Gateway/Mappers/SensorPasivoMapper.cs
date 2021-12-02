@@ -17,22 +17,20 @@ namespace API.Gateway.Mappers
 
         public void Agregar(Modelos.SensorPasivo model)
         {
-            var sqlParameters = new SqlParameter[4];
+            var sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(Modelos.SensorPasivo model)
         {
-            var sqlParameters = new SqlParameter[5];
+            var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
-            sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Libre", model.Libre);
+            sqlParameters[3] = new SqlParameter("@Libre", model.Libre);
 
             db.Escribir("actualizar", sqlParameters);
         }
@@ -48,7 +46,6 @@ namespace API.Gateway.Mappers
                 sensorPasivo.Id = (int) fila["Id"];
                 sensorPasivo.Nombre = fila["Nombre"].ToString();
                 sensorPasivo.Url= fila["Url"].ToString();
-                sensorPasivo.Conectado = (bool) fila["Conectado"];
                 sensorPasivo.Libre = (bool) fila["Libre"];
                 lista.Add(sensorPasivo);
             }
@@ -68,7 +65,6 @@ namespace API.Gateway.Mappers
                 sensorPasivo.Id = (int) fila["Id"];
                 sensorPasivo.Nombre = fila["Nombre"].ToString();
                 sensorPasivo.Url= fila["Url"].ToString();
-                sensorPasivo.Conectado = (bool) fila["Conectado"];
                 sensorPasivo.Libre = (bool) fila["Libre"];
                 return sensorPasivo;
             }

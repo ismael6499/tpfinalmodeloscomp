@@ -1,19 +1,19 @@
 using System;
-using System.Diagnostics.SymbolStore;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using NetMQ;
 using NetMQ.Sockets;
 using PrensaAPI.Data;
+using PrensaAPI.Modelos;
 
-namespace PrensaAPI.Modelos
+namespace PrensaAPI.Services
 {
     public class PrensaService
     {
         public string Estado { get; set; } = EstadoPrensaConstants.LEVANTADO;
+        public bool Encendida { get; set; }
 
         public async Task<Bulto> Prensar(Bulto bulto)
         {

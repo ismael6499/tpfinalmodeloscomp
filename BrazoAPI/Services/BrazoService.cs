@@ -15,6 +15,8 @@ namespace BrazoAPI
     {
         List<string> listaBultosJson = new List<string>();
 
+        public bool Encendido { get; set; }
+
         private IConnection connection;
         private IConfiguration configuration;
 
@@ -37,15 +39,24 @@ namespace BrazoAPI
             var consumidor = new EventingBasicConsumer(canalReceiver);
             consumidor.Received += (model, ea) =>
             {
-                var body = ea.Body.ToArray();
-                var bodyString = Encoding.UTF8.GetString(body);
+                var eaDeliveryTag = ea.DeliveryTag;
+                if (Encendido)
+                {
+                    var body = ea.Body.ToArray();
+                    var bodyString = Encoding.UTF8.GetString(body);
 
-                Logger.GetInstance().WriteLog($"[X] Bulto Recibido en Brazo {bodyString}");
-                Bulto bulto = JsonConvert.DeserializeObject<Bulto>(bodyString);
-                tomarBulto(bulto);
+                    Logger.GetInstance().WriteLog($"[X] Bulto Recibido en Brazo {bodyString}");
+                    Bulto bulto = JsonConvert.DeserializeObject<Bulto>(bodyString);
+                    canalReceiver.BasicAck(eaDeliveryTag, false);
+                    tomarBulto(bulto);
+                }
+                else
+                {
+                    canalReceiver.BasicReject(eaDeliveryTag, true);
+                }
             };
 
-            canalReceiver.BasicConsume(queue: "Cinta", autoAck: true, consumer: consumidor);
+            canalReceiver.BasicConsume(queue: "Cinta", autoAck: false, consumer: consumidor);
 
             Console.ReadKey();
         }
@@ -56,16 +67,49 @@ namespace BrazoAPI
             publicarRecibidoParaCinta(bulto);
             //todo buscar todas las prensas disponibles
             string urlPrensa = configuration["urls:prensa"];
+            bool isEncendida = checkPrensaEncendida(urlPrensa);
+            if (!isEncendida)
+            {
+                //todo siguiente prensa
+                Logger.GetInstance().WriteLogError("La prensa se encuentra apagada");
+            }
             bool isLibre = checkPrensaLibre(urlPrensa);
             bool isLevantado = checkPrensaLevantada(urlPrensa);
             if (isLibre && isLevantado)
             {
-                enviarBultoParaPrensar(bulto,urlPrensa);
+                enviarBultoParaPrensar(bulto, urlPrensa);
                 Logger.GetInstance().WriteLog("Se ha enviado el bulto a la prensa");
             }
             else
             {
                 Logger.GetInstance().WriteLog("Prensa no disponible");
+            }
+        }
+
+        private bool checkPrensaEncendida(string urlPrensa)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    httpClient.BaseAddress = new Uri(urlPrensa);
+                    var responseTask = httpClient.GetAsync("/api/status");
+                    responseTask.Wait();
+                    var result = responseTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var readTask = result.Content.ReadAsStringAsync();
+                        readTask.Wait();
+                        string readResult = readTask.Result;
+                        var boolean = Boolean.Parse(readResult);
+                        return boolean;
+                    }
+                }
+                catch (Exception e)
+                {
+                }
+
+                return false;
             }
         }
 
@@ -78,7 +122,7 @@ namespace BrazoAPI
                     httpClient.BaseAddress = new Uri(urlPrensa);
                     var jsonBulto = JsonConvert.SerializeObject(bulto);
                     StringContent stringContent = new StringContent(jsonBulto, Encoding.UTF8, "application/json");
-                    var responseTask = httpClient.PostAsync("/api/prensar",stringContent);
+                    var responseTask = httpClient.PostAsync("/api/prensar", stringContent);
                     responseTask.Wait();
                     var result = responseTask.Result;
                     var readTask = result.Content.ReadAsStringAsync();
@@ -100,7 +144,7 @@ namespace BrazoAPI
                 try
                 {
                     httpClient.BaseAddress = new Uri(urlPrensa);
-                    var responseTask =  httpClient.GetAsync("/api/libre");
+                    var responseTask = httpClient.GetAsync("/api/libre");
                     responseTask.Wait();
                     var result = responseTask.Result;
                     if (result.IsSuccessStatusCode)
@@ -115,11 +159,11 @@ namespace BrazoAPI
                 catch (Exception e)
                 {
                 }
+
                 return false;
             }
-            
         }
-        
+
         private bool checkPrensaLevantada(string urlPrensa)
         {
             using (var httpClient = new HttpClient())
@@ -127,7 +171,7 @@ namespace BrazoAPI
                 try
                 {
                     httpClient.BaseAddress = new Uri(urlPrensa);
-                    var responseTask =  httpClient.GetAsync("/api/estado");
+                    var responseTask = httpClient.GetAsync("/api/estado");
                     responseTask.Wait();
                     var result = responseTask.Result;
                     if (result.IsSuccessStatusCode)
@@ -138,13 +182,15 @@ namespace BrazoAPI
                         Señal señal = JsonConvert.DeserializeObject<Señal>(readResult);
                         return señal.Estado == "Levantado";
                     }
+
+                    return false;
                 }
                 catch (Exception e)
                 {
                 }
+
                 return false;
             }
-            
         }
 
         private void publicarRecibidoParaCinta(Bulto bulto)

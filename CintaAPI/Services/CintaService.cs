@@ -13,6 +13,8 @@ namespace CintaAPI.Services
     {
         private Dictionary<string, Bulto> bultosDict = new();
         
+        public bool Encendido { get; set; }
+        
         private readonly ConnectionFactory factory;
         private readonly IConnection connection;
         private readonly IModel canalCintaPublish;
@@ -62,7 +64,16 @@ namespace CintaAPI.Services
             canalCintaPublish.BasicPublish("", routingKey: "Cinta", basicProperties: null, body: body);
             Logger.GetInstance().WriteLog($"Avisando a brazo de bulto disponible: {bultoJson}");
         }
-        
-        
+
+
+        public void Encender()
+        {
+            this.Encendido = true;
+        }
+
+        public void Apagar()
+        {
+            this.Encendido = false;
+        }
     }
 }

@@ -15,24 +15,32 @@ namespace Sensor.Pasivo.Data
             db = Datos.GetInstance();
         }
 
+        public void ChangeEstado(Models.SensorPasivo model)
+        {
+            var sqlParameters = new SqlParameter[2];
+            sqlParameters[0] = new SqlParameter("@Url", model.Url);
+            sqlParameters[1] = new SqlParameter("@Libre", model.Libre);
+
+            db.Escribir("changeestado", sqlParameters);
+        }
+
+        
         public void Agregar(Models.SensorPasivo model)
         {
-            var sqlParameters = new SqlParameter[4];
+            var sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(Models.SensorPasivo model)
         {
-            var sqlParameters = new SqlParameter[6];
+            var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
-            sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Libre", model.Libre);
+            sqlParameters[3] = new SqlParameter("@Libre", model.Libre);
 
             db.Escribir("actualizar", sqlParameters);
         }
@@ -48,7 +56,6 @@ namespace Sensor.Pasivo.Data
                 sensorPasivo.Id = (int) fila["Id"];
                 sensorPasivo.Nombre = fila["Nombre"].ToString();
                 sensorPasivo.Url= fila["Url"].ToString();
-                sensorPasivo.Conectado = (bool) fila["Conectado"];
                 sensorPasivo.Libre = (bool) fila["Libre"];
                 lista.Add(sensorPasivo);
             }
@@ -68,7 +75,6 @@ namespace Sensor.Pasivo.Data
                 sensorPasivo.Id = (int) fila["Id"];
                 sensorPasivo.Nombre = fila["Nombre"].ToString();
                 sensorPasivo.Url= fila["Url"].ToString();
-                sensorPasivo.Conectado = (bool) fila["Conectado"];
                 sensorPasivo.Libre = (bool) fila["Libre"];
                 return sensorPasivo;
             }

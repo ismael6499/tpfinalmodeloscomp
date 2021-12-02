@@ -16,25 +16,42 @@ namespace PrensaAPI.Data
             db = Datos.GetInstance();
         }
 
+        public void Encender(Prensa model)
+        {
+            var sqlParameters = new SqlParameter[2];
+            sqlParameters[1] = new SqlParameter("@Url", model.Url);
+            sqlParameters[2] = new SqlParameter("@Encendido", true);
+
+            db.Escribir("encender", sqlParameters);
+        }
+        
+        public void Apagar(Prensa model)
+        {
+            var sqlParameters = new SqlParameter[2];
+            sqlParameters[1] = new SqlParameter("@Url", model.Url);
+            sqlParameters[2] = new SqlParameter("@Encendido", false);
+
+            db.Escribir("apagar", sqlParameters);
+        }
+
+        
         public void Agregar(Prensa model)
         {
-            var sqlParameters = new SqlParameter[4];
+            var sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
+            sqlParameters[2] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(Prensa model)
         {
-            var sqlParameters = new SqlParameter[6];
+            var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
-            sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Encendido", model.Encendido);
+            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("actualizar", sqlParameters);
         }
@@ -50,7 +67,6 @@ namespace PrensaAPI.Data
                 Prensa.Id = (int) fila["Id"];
                 Prensa.Nombre = fila["Nombre"].ToString();
                 Prensa.Url= fila["Url"].ToString();
-                Prensa.Conectado = (bool) fila["Conectado"];
                 Prensa.Encendido = (bool) fila["Encendido"];
                 lista.Add(Prensa);
             }
@@ -70,7 +86,6 @@ namespace PrensaAPI.Data
                 Prensa.Id = (int) fila["Id"];
                 Prensa.Nombre = fila["Nombre"].ToString();
                 Prensa.Url= fila["Url"].ToString();
-                Prensa.Conectado = (bool) fila["Conectado"];
                 Prensa.Encendido = (bool) fila["Encendido"];
                 return Prensa;
             }

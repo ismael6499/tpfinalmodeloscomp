@@ -18,21 +18,19 @@ namespace API.Gateway.Mappers
 
         public void Agregar(PilaDeBultos model)
         {
-            var sqlParameters = new SqlParameter[3];
+            var sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(PilaDeBultos model)
         {
-            var sqlParameters = new SqlParameter[4];
+            var sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
-            sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
 
             db.Escribir("actualizar", sqlParameters);
         }
@@ -48,7 +46,6 @@ namespace API.Gateway.Mappers
                 PilaDeBultos.Id = (int) fila["Id"];
                 PilaDeBultos.Nombre = fila["Nombre"].ToString();
                 PilaDeBultos.Url= fila["Url"].ToString();
-                PilaDeBultos.Conectado = (bool) fila["Conectado"];
                 lista.Add(PilaDeBultos);
             }
 
@@ -67,7 +64,6 @@ namespace API.Gateway.Mappers
                 PilaDeBultos.Id = (int) fila["Id"];
                 PilaDeBultos.Nombre = fila["Nombre"].ToString();
                 PilaDeBultos.Url= fila["Url"].ToString();
-                PilaDeBultos.Conectado = (bool) fila["Conectado"];
                 return PilaDeBultos;
             }
 

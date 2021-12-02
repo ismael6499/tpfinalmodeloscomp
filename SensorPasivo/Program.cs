@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Sensor.Pasivo.Data;
+using Sensor.Pasivo.Models;
 
 namespace Sensor.Pasivo
 {
@@ -91,7 +92,8 @@ namespace Sensor.Pasivo
             Socket listener = new Socket(ipAddr.AddressFamily,
                 SocketType.Stream, ProtocolType.Tcp);
 
-            Logger.GetInstance().WriteLog("Iniciando sensor pasivo en " + ipAdressToString(ipAddr) + ":" + puertoNro);
+            var url = ipAdressToString(ipAddr) + ":" + puertoNro;
+            Logger.GetInstance().WriteLog("Iniciando sensor pasivo en " + url);
 
             try
             {
@@ -143,6 +145,8 @@ namespace Sensor.Pasivo
                         {
                             bool valorNuevo = bool.Parse(value);
                             estadoLibre = valorNuevo;
+                            var mapper = new Mapper();
+                            mapper.ChangeEstado(new SensorPasivo(){Libre = estadoLibre,Url = url});
                             mensaje = "Establecido correctamente";
                             Logger.GetInstance().WriteLog(mensaje);
                         }

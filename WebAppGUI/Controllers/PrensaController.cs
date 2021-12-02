@@ -14,7 +14,7 @@ namespace WebAppGUI.Controllers
         {
             var jsonListaPrensa = ApiGatewayClient.MakeGet("prensa/getall");
             List<Prensa> lista = JsonConvert.DeserializeObject<List<Prensa>>(jsonListaPrensa);
-            
+
             Logger.GetInstance().WriteLog($"Consultando prensa/getall");
 
             return View(lista);
@@ -23,7 +23,7 @@ namespace WebAppGUI.Controllers
         public ActionResult Details(int id)
         {
             var jsonPrensa = ApiGatewayClient.MakeGet($"prensa/get/{id}");
-            
+
             Logger.GetInstance().WriteLog($"Consultando prensa/get/{id}");
             var entidad = JsonConvert.DeserializeObject<Prensa>(jsonPrensa);
             return View(entidad);
@@ -39,8 +39,8 @@ namespace WebAppGUI.Controllers
         {
             try
             {
-                ApiGatewayClient.MakePost($"prensa/create",prensa);
-                
+                ApiGatewayClient.MakePost($"prensa/create", prensa);
+
                 Logger.GetInstance().WriteLog($"Creando prensa");
                 return RedirectToAction(nameof(Index));
             }
@@ -63,8 +63,8 @@ namespace WebAppGUI.Controllers
         {
             try
             {
-                ApiGatewayClient.MakePost($"prensa/edit",prensa);
-                
+                ApiGatewayClient.MakePost($"prensa/edit", prensa);
+
                 Logger.GetInstance().WriteLog($"Editando prensa");
                 return RedirectToAction(nameof(Index));
             }
@@ -88,8 +88,8 @@ namespace WebAppGUI.Controllers
         {
             try
             {
-                ApiGatewayClient.MakePost($"prensa/delete",prensa);
-                
+                ApiGatewayClient.MakePost($"prensa/delete", prensa);
+
                 Logger.GetInstance().WriteLog($"Eliminando prensa");
                 return RedirectToAction(nameof(Index));
             }
@@ -98,6 +98,38 @@ namespace WebAppGUI.Controllers
                 ModelState.AddModelError("", e.Message);
 
                 return View();
+            }
+        }
+
+        public IActionResult Encender(string url)
+        {
+            try
+            {
+                ApiGatewayClient.MakeGet($"encender/{url}");
+                
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        
+        public IActionResult Apagar(string url)
+        {
+            try
+            {
+                ApiGatewayClient.MakeGet($"apagar/{url}");
+                
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+
+                return RedirectToAction(nameof(Index));
             }
         }
     }

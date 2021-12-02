@@ -95,5 +95,37 @@ namespace WebAppGUI.Controllers
                 return View();
             }
         }
+        
+        public IActionResult Encender(string url)
+        {
+            try
+            {
+                ApiGatewayClient.MakeGet($"encender/{url}");
+                
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        
+        public IActionResult Apagar(string url)
+        {
+            try
+            {
+                ApiGatewayClient.MakeGet($"apagar/{url}");
+                
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }

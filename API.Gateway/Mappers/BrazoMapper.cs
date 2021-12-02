@@ -18,23 +18,21 @@ namespace API.Gateway.Mappers
 
         public void Agregar(Brazo model)
         {
-            var sqlParameters = new SqlParameter[4];
+            var sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
+            sqlParameters[2] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(Brazo model)
         {
-            var sqlParameters = new SqlParameter[5];
+            var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
-            sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Encendido", model.Encendido);
+            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("actualizar", sqlParameters);
         }
@@ -50,7 +48,6 @@ namespace API.Gateway.Mappers
                 brazo.Id = (int) fila["Id"];
                 brazo.Nombre = fila["Nombre"].ToString();
                 brazo.Url= fila["Url"].ToString();
-                brazo.Conectado = (bool) fila["Conectado"];
                 brazo.Encendido = (bool) fila["Encendido"];
                 lista.Add(brazo);
             }
@@ -70,7 +67,6 @@ namespace API.Gateway.Mappers
                 brazo.Id = (int) fila["Id"];
                 brazo.Nombre = fila["Nombre"].ToString();
                 brazo.Url= fila["Url"].ToString();
-                brazo.Conectado = (bool) fila["Conectado"];
                 brazo.Encendido = (bool) fila["Encendido"];
                 return brazo;
             }

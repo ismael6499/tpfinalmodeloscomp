@@ -18,23 +18,21 @@ namespace CintaAPI.Data
 
         public void Agregar(Cinta model)
         {
-            var sqlParameters = new SqlParameter[4];
+            var sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
-            sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
+            sqlParameters[2] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(Cinta model)
         {
-            var sqlParameters = new SqlParameter[5];
+            var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
-            sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Encendido", model.Encendido);
+            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("actualizar", sqlParameters);
         }
@@ -50,7 +48,6 @@ namespace CintaAPI.Data
                 Cinta.Id = (int) fila["Id"];
                 Cinta.Nombre = fila["Nombre"].ToString();
                 Cinta.Url= fila["Url"].ToString();
-                Cinta.Conectado = (bool) fila["Conectado"];
                 Cinta.Encendido = (bool) fila["Encendido"];
                 lista.Add(Cinta);
             }
@@ -70,7 +67,6 @@ namespace CintaAPI.Data
                 Cinta.Id = (int) fila["Id"];
                 Cinta.Nombre = fila["Nombre"].ToString();
                 Cinta.Url= fila["Url"].ToString();
-                Cinta.Conectado = (bool) fila["Conectado"];
                 Cinta.Encendido = (bool) fila["Encendido"];
                 return Cinta;
             }
@@ -87,7 +83,22 @@ namespace CintaAPI.Data
         }
 
 
+        public void Encender(Cinta model)
+        {
+            var sqlParameters = new SqlParameter[2];
+            sqlParameters[1] = new SqlParameter("@Url", model.Url);
+            sqlParameters[2] = new SqlParameter("@Encendido", true);
 
+            db.Escribir("encender", sqlParameters);
+        }
+        
+        public void Apagar(Cinta model)
+        {
+            var sqlParameters = new SqlParameter[2];
+            sqlParameters[1] = new SqlParameter("@Url", model.Url);
+            sqlParameters[2] = new SqlParameter("@Encendido", false);
 
+            db.Escribir("apagar", sqlParameters);
+        }
     }
 }

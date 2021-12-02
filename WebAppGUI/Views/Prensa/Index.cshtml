@@ -22,9 +22,6 @@
             @Html.DisplayNameFor(model => model.Url)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Conectado)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Encendido)
         </th>
 
@@ -44,9 +41,6 @@
             @Html.DisplayFor(modelItem => item.Url)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Conectado)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Encendido)
         </td>
 
@@ -54,6 +48,8 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Encender", "Encender", new { url = item.Url })
+            @Html.ActionLink("Apagar", "Apagar", new { url = item.Url })
         </td>
     </tr>
 }

@@ -13,8 +13,6 @@ namespace API.Gateway.Modelos
         [Required]
         public string Url { get; set; }
 
-        public bool Conectado { get; set; }
-
 
         public List<Bulto> Bultos { get; set; }
 
