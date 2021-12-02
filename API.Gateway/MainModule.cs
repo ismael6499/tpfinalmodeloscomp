@@ -49,7 +49,13 @@ namespace ApiGateway
             Get("/v1/encender/{url}", x =>
             {
                 string url = x.url;
-
+                if (url.Contains(";") && !url.Contains("https://"))
+                {
+                    url = "https://" + url.Replace(";", "");
+                }else if (!url.Contains("http://"))
+                {
+                    url = "http://" + url.Replace("http://","");
+                }
                 using (var httpClient = new HttpClient())
                 {
                     try
@@ -73,7 +79,13 @@ namespace ApiGateway
             Get("/v1/apagar/{url}", x =>
             {
                 string url = x.url;
-              
+                if (url.Contains(";") && !url.Contains("https://"))
+                {
+                    url = "https://" + url.Replace(";", "");
+                }else if (!url.Contains("http://"))
+                {
+                    url = "http://" + url.Replace("http://","");
+                }
                 using (var httpClient = new HttpClient())
                 {
                     try

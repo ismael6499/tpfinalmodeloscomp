@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading;
 using API.Gateway;
 
 namespace DataAccess
@@ -98,7 +99,8 @@ namespace DataAccess
             sqlParameters[0] = new SqlParameter("@componente", componente);
             sqlParameters[1] = new SqlParameter("@descripcion", description);
             sqlParameters[2] = new SqlParameter("@tipo", "Debug");
-            Escribir("writeLog",sqlParameters);
+              Thread.Sleep(300);
+Escribir("writeLog",sqlParameters);
         }
         
          public void WriteLogError(string description)
@@ -109,7 +111,8 @@ namespace DataAccess
             sqlParameters[0] = new SqlParameter("@componente", componente);
             sqlParameters[1] = new SqlParameter("@descripcion", description);
             sqlParameters[2] = new SqlParameter("@tipo", "Error");
-            Escribir("writeLog",sqlParameters);
+              Thread.Sleep(300);
+Escribir("writeLog",sqlParameters);
         }
         
         public void WriteLogError(Exception exception)
@@ -121,7 +124,8 @@ namespace DataAccess
             sqlParameters[0] = new SqlParameter("@componente", componente);
             sqlParameters[1] = new SqlParameter("@descripcion", msjError);
             sqlParameters[2] = new SqlParameter("@tipo", "Error");
-            Escribir("writeLog",sqlParameters);
+              Thread.Sleep(300);
+Escribir("writeLog",sqlParameters);
         }
     }
 }

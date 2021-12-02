@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading;
 using Data;
 using WebAppGUI;
 using WebAppGUI.Modelos;
@@ -152,7 +153,8 @@ namespace WebAppGUI.Data
             sqlParameters[0] = new SqlParameter("@componente", componente);
             sqlParameters[1] = new SqlParameter("@descripcion", description);
             sqlParameters[2] = new SqlParameter("@tipo", "Debug");
-            Escribir("writeLog",sqlParameters);
+              Thread.Sleep(300);
+Escribir("writeLog",sqlParameters);
         }
         
          public void WriteLogError(string description)
@@ -163,7 +165,8 @@ namespace WebAppGUI.Data
             sqlParameters[0] = new SqlParameter("@componente", componente);
             sqlParameters[1] = new SqlParameter("@descripcion", description);
             sqlParameters[2] = new SqlParameter("@tipo", "Error");
-            Escribir("writeLog",sqlParameters);
+              Thread.Sleep(300);
+Escribir("writeLog",sqlParameters);
         }
          
          public void WriteLogError(Exception exception)
@@ -175,6 +178,7 @@ namespace WebAppGUI.Data
              sqlParameters[0] = new SqlParameter("@componente", componente);
              sqlParameters[1] = new SqlParameter("@descripcion", msjError);
              sqlParameters[2] = new SqlParameter("@tipo", "Error");
+             Thread.Sleep(300);
              Escribir("writeLog", sqlParameters);
          }
 

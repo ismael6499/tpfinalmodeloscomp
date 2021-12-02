@@ -12,8 +12,8 @@ namespace CintaAPI.Services
     public class CintaService
     {
         private Dictionary<string, Bulto> bultosDict = new();
-        
-        public bool Encendido { get; set; }
+
+        public bool Encendido { get; set; } = true;
         
         private readonly ConnectionFactory factory;
         private readonly IConnection connection;
