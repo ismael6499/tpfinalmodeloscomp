@@ -4,34 +4,49 @@
     ViewData["Title"] = "Bultos";
 }
 
+<style>
+    .escondido {
+        display: none;
+    }
+</style>
 
 <div class="container pt-5">
     <h1>Bulto</h1>
-<hr />
-<div class="row center-all">
-    <div class="col-md-6">
-        <form asp-action="PonerBulto">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Enviar Bulto" class="btn btn-primary btn-block" />
-            </div>
-        </form>
+    <hr />
+    <div class="row center-all">
+        <div class="col-md-6">
+            <form asp-action="PonerBulto">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label"></label>
+                    <input asp-for="Descripcion" class="form-control" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" onclick="showSpinner()">
+                        <span>Enviar Bulto</span>
+                        
+                        <div id="spinner" class="spinner-border spinner-border-sm text-white escondido" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-</div>
-
-@Html.Raw(response)
 
 <div>
     <a asp-action="Index" asp-controller="Home">Volver al inicio</a>
 </div>
+
+<script>
+    function showSpinner() {
+        $("#spinner").removeClass('escondido');
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
