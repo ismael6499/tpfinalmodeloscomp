@@ -1,0 +1,16 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.toolbar-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.toolbar-list a {
+    color: white;
+}
+
+.main-content  {
+    height: 100vh;
+}
