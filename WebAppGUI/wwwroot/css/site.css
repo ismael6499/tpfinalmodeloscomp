@@ -9,12 +9,12 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: white;
+  color: #1b6ec2;
   text-decoration: none;
 }
 
 a:hover {
-    color: white;
+    color: #1861ac;
     text-decoration: none;
 }
 

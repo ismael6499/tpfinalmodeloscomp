@@ -16,6 +16,7 @@ namespace WebAppGUI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.isHome = true;
             return View();
         }
 
