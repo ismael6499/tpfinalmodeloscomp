@@ -65,6 +65,7 @@
                     margin: 0 8px;
                     color: #fff;
                     opacity: 0.75;
+                    cursor: pointer;
                 }
 
                     .footer-dark .item.social > a:hover {
@@ -135,7 +136,7 @@
                     </div>
                     <div class="col item social">
                         <a href="https://github.com/ismael6499/tpfinalmodeloscomp/tree/master" target="_blank"><i class="fas fa-code"></i></a>
-                        <a href="#"><i class="fas fa-thumbs-up"></i></a>
+                        <a onclick="notify()"><i class="fas fa-thumbs-up"></i></a>
                     </div>
                 </div>
                 <p class="copyright">Universidad Abierta Interamericana | Facultad de Ingeniería Informática | @DateTime.Now.Year</p>
@@ -145,6 +146,19 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("Notyf") 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function notify() {
+            console.log('working');
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("Notify", "Home")',
+            }).done(function () {
+            }).fail(function () {
+            });
+        }
+    </script>
 </body>
 </html>
