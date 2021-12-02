@@ -1,28 +1,41 @@
-﻿<div style="margin: 1.5em 0">
-    <div class="col-md-12">
-        <img class="img-fluid center-block" src="imagen-brazo.jpg"/>
-    </div>
-</div>
+﻿<style>
+    .image {
+        height: 100%;
+        background-image: url("production.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.85;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 
-<div class="row center-block">
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Componentes", "Index", "Componentes")
-        </button>
-    </div>
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Crear Bulto", "Index", "Bultos")
-        </button>
-    </div>
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Gráficos", "Index", "Graficos")
-        </button>
-    </div>
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Bitácora", "Index", "Log")
-        </button>
+
+<div class="image">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-primary">
+                    @Html.ActionLink("Componentes", "Index", "Componentes")
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-primary">
+                    @Html.ActionLink("Crear Bulto", "Index", "Bultos")
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-primary">
+                    @Html.ActionLink("Gráficos", "Index", "Graficos")
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-primary">
+                    @Html.ActionLink("Bitácora", "Index", "Log")
+                </button>
+            </div>
+        </div>
     </div>
 </div>

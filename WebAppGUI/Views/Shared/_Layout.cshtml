@@ -9,23 +9,22 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+<div class="navbar navbar-fixed-top bg-dark">
+    <div class="container" style="display:flex; justify-content: center;">
         <div class="navbar-header">
-            @Html.ActionLink("Sistema de Bultos", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+            @Html.ActionLink("Sistema de Bultos", "Index", "Home", new {area = ""}, new {@class = "navbar-brand mb-0 h1 text-white"})
         </div>
     </div>
 </div>
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
+<main role="main" style="height: 100%">
+    @RenderBody()
+</main>
 
-<footer class="border-top footer text-muted">
+@*<footer class="border-top mt-5 footer text-muted bg-secondary">
     <div class="container">
+        <p>this is the footer</p>
     </div>
-</footer>
+</footer>*@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
