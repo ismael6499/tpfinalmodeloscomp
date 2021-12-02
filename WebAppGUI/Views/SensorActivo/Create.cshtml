@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    List<SelectListItem> listaValores = new List<SelectListItem>() { new(){Text = "Levantado",Value = "Levantado"},new(){Text = "Prensando",Value = "Prensando"}  };
 }
 
 <h1>Create</h1>
@@ -24,7 +25,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control"/>
+                <select asp-for="Estado" asp-items="@listaValores"></select> 
+
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
 

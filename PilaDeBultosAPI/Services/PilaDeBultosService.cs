@@ -12,6 +12,7 @@ namespace PilaDeBultosAPI
             Bultos.Add(bulto);
             Logger.GetInstance().WriteLog($"Bulto {bulto.GlobalId} agregado a la pila de bultos");
             bulto.Estado = "Apilado";
+            Logger.GetInstance().SaveBultoLog(bulto);
         }
 
         

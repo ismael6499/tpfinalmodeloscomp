@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using WebAppGUI.Data;
 
 namespace WebAppGUI.Services
 {
@@ -11,14 +12,21 @@ namespace WebAppGUI.Services
         {
             var urlApiGateway = Program.configuration["urls:ApiGateway"];
             string responseAsString = "";
-            using (var httpClient = new HttpClient())
+            try
             {
-                httpClient.BaseAddress = new Uri(urlApiGateway);
-                var response = httpClient.PostAsJsonAsync(path, obj);
-                response.Wait();
-                var readTask = response.Result.Content.ReadAsStringAsync();
-                readTask.Wait();
-                responseAsString = readTask.Result;
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.BaseAddress = new Uri(urlApiGateway);
+                    var response = httpClient.PostAsJsonAsync(path, obj);
+                    response.Wait();
+                    var readTask = response.Result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    responseAsString = readTask.Result;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.GetInstance().WriteLogError(e.ToString());
             }
             return responseAsString;
         }
@@ -27,14 +35,21 @@ namespace WebAppGUI.Services
         {
             var urlApiGateway = Program.configuration["urls:ApiGateway"];
             string responseAsString = "";
-            using (var httpClient = new HttpClient())
+            try
             {
-                httpClient.BaseAddress = new Uri(urlApiGateway);
-                var response =  httpClient.GetAsync(path);
-                response.Wait();
-                var readTask = response.Result.Content.ReadAsStringAsync();
-                readTask.Wait();
-                responseAsString = readTask.Result;
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.BaseAddress = new Uri(urlApiGateway);
+                    var response =  httpClient.GetAsync(path);
+                    response.Wait();
+                    var readTask = response.Result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    responseAsString = readTask.Result;
+                }
+            }
+            catch (Exception e)
+            {
+              Logger.GetInstance().WriteLogError(e.ToString());
             }
             return responseAsString;
         }

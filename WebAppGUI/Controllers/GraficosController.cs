@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using WebAppGUI.Data;
+using WebAppGUI.Modelos;
 
 namespace WebAppGUI.Controllers
 {
@@ -11,6 +10,19 @@ namespace WebAppGUI.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public JsonResult GetPiechartJSON()
+        {
+            var bultoLog = Logger.GetInstance().GetBultoLog();
+
+            List<ChartsModel> list = new List<ChartsModel>();
+
+            list.Add(new ChartsModel { tipo = "Ingresados", cantidad = bultoLog.Ingresados });
+            list.Add(new ChartsModel { tipo = "Prensado", cantidad = bultoLog.Prensado });
+            list.Add(new ChartsModel { tipo = "Apilados", cantidad = bultoLog.Apilados });
+
+            return Json(new { JSONList = list });
         }
     }
 }

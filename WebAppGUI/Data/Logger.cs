@@ -177,5 +177,27 @@ namespace WebAppGUI.Data
              sqlParameters[2] = new SqlParameter("@tipo", "Error");
              Escribir("writeLog", sqlParameters);
          }
+
+         public BultoLog GetBultoLog()
+         {
+             DataTable dataTable = Consultar("consultarDataBultos",null);
+             foreach (DataRow row in dataTable.Rows)
+             {
+                 var bultoLog = new BultoLog();
+                 bultoLog.Ingresados = int.Parse(row["ingresados"].ToString());
+                 bultoLog.Prensado = int.Parse(row["prensando"].ToString());
+                 bultoLog.Apilados = int.Parse(row["apilados"].ToString());
+                 return bultoLog;
+             }
+
+             return new BultoLog();
+         }
+    }
+
+    public class BultoLog
+    {
+        public int Ingresados { get; set; }
+        public int Prensado { get; set; }
+        public int Apilados { get; set; }
     }
 }

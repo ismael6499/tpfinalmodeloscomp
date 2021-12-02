@@ -19,7 +19,8 @@ namespace PrensaAPI.Services
         {
             Estado = EstadoPrensaConstants.PRENSANDO;
             bulto.Estado = "En proceso de Prensado";
-            //todo guardar en bd bulto
+            Logger.GetInstance().SaveBultoLog(bulto);
+            
             ConsultaZmq($"$set${Estado}");
             Logger.GetInstance().WriteLog("Prensando bulto " + bulto.GlobalId);
             await Task.Delay(2000);

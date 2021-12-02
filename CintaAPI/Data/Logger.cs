@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using CintaAPI.Modelos;
 
 namespace CintaAPI.Data
 {
@@ -121,6 +122,16 @@ namespace CintaAPI.Data
              sqlParameters[1] = new SqlParameter("@descripcion", msjError);
              sqlParameters[2] = new SqlParameter("@tipo", "Error");
              Escribir("writeLog", sqlParameters);
+         }
+         
+         public void SaveBultoLog(Bulto bulto)
+         {
+             SqlParameter[] sqlParameters = new SqlParameter[4];
+             sqlParameters[0] = new SqlParameter("@globalid", bulto.GlobalId);
+             sqlParameters[1] = new SqlParameter("@descripcion", bulto.Descripcion);
+             sqlParameters[2] = new SqlParameter("@fecha", bulto.Fecha);
+             sqlParameters[3] = new SqlParameter("@estado", bulto.Estado);
+             Escribir("saveBultoLog", sqlParameters);
          }
     }
 }

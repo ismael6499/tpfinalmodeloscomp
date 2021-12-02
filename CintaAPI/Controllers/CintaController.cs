@@ -51,7 +51,9 @@ namespace CintaAPI.Controllers
             }
             string jsonString = body.ToString();
             Bulto bulto = JsonConvert.DeserializeObject<Bulto>(jsonString);
+            bulto.Estado = "Iniciado";
             _mCintaService.ponerBulto(bulto);
+            Logger.GetInstance().SaveBultoLog(bulto);
             return JsonConvert.SerializeObject(bulto);
         }
     }
