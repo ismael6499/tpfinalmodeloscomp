@@ -10,29 +10,35 @@
         justify-content: center;
         align-items: center;
     }
+
+    .main-row {
+        padding: 15px 25px;
+        justify-content: center;
+        display: flex;
+    }
 </style>
 
 
 <div class="image">
     <div class="container">
-        <div class="row">
+        <div class="row main-row bg-dark">
             <div class="col-md-3">
-                <button class="btn btn-lg btn-primary">
+                <button class="btn btn-lg btn-outline-primary">
                     @Html.ActionLink("Componentes", "Index", "Componentes")
                 </button>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-lg btn-primary">
+                <button class="btn btn-lg btn-outline-success">
                     @Html.ActionLink("Crear Bulto", "Index", "Bultos")
                 </button>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-lg btn-primary">
+                <button class="btn btn-lg btn-outline-warning">
                     @Html.ActionLink("Gráficos", "Index", "Graficos")
                 </button>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-lg btn-primary">
+                <button class="btn btn-lg btn-outline-danger">
                     @Html.ActionLink("Bitácora", "Index", "Log")
                 </button>
             </div>
