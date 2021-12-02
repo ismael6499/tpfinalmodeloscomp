@@ -8,6 +8,7 @@ using NetMQ;
 using NetMQ.Sockets;
 using Newtonsoft.Json;
 using SensorActivo.Data;
+using SensorActivo.DataMapper;
 using SensorActivo.Models;
 
 namespace SensorActivo
@@ -58,7 +59,8 @@ namespace SensorActivo
 
             try
             {
-                using (var server = new ResponseSocket($"tcp://{ip}:{puertoNro}"))
+                var url = $"{ip}:{puertoNro}";
+                using (var server = new ResponseSocket("tcp://"+url))
                 {
                     Logger.GetInstance().WriteLog($"Iniciando sensor pasivo en tcp://{ip}:{puertoNro}");
                     while (true)
@@ -80,6 +82,9 @@ namespace SensorActivo
                             string valorRecibido = server.ReceiveFrameString();
 
                             mensaje = validarValorRecibido(valorRecibido);
+
+                            guardarValorBd(valorRecibido, url);
+                            
                             Logger.GetInstance().WriteLog("Levantado Procesado");
                         }
                         else if (data.Contains("$set$"))
@@ -87,6 +92,9 @@ namespace SensorActivo
                             string valorToSet = data.Replace("$set$", "");
 
                             mensaje = validarValorRecibido(valorToSet);
+                            
+                            guardarValorBd(valorToSet, url);
+
 
                             Logger.GetInstance().WriteLog("Set procesado");
                         }
@@ -100,6 +108,12 @@ namespace SensorActivo
             {
                 Logger.GetInstance().WriteLogError(e.ToString());
             }
+        }
+
+        private static void guardarValorBd(string valorRecibido, string url)
+        {
+            var mapper = new Mapper();
+            mapper.ChangeEstado(new Models.SensorActivo(){Estado = valorRecibido,Url =url});
         }
 
         private static string validarValorRecibido(string valorRecibido)

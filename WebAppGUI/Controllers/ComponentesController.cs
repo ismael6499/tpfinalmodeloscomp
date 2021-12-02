@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebAppGUI.Data;
 
 namespace WebAppGUI.Controllers
 {
@@ -7,6 +8,7 @@ namespace WebAppGUI.Controllers
         // GET
         public IActionResult Index()
         {
+            Logger.GetInstance().WriteLog($"Componentes Controller index");
             return View();
         }
     }

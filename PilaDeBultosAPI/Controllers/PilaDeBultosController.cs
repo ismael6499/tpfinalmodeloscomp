@@ -11,11 +11,11 @@ namespace PilaDeBultosAPI.Controllers
     [ApiController]
     public class PilaDeBultosController : ControllerBase
     {
-        private readonly PilaDeBultos pilaDeBultos;
+        private readonly PilaDeBultosService _pilaDeBultosService;
 
-        public PilaDeBultosController(PilaDeBultos pilaDeBultos)
+        public PilaDeBultosController(PilaDeBultosService pilaDeBultosService)
         {
-            this.pilaDeBultos = pilaDeBultos;
+            this._pilaDeBultosService = pilaDeBultosService;
         }
 
         [HttpPost]
@@ -26,7 +26,7 @@ namespace PilaDeBultosAPI.Controllers
             try
             {
                 Bulto bulto = JsonConvert.DeserializeObject<Bulto>(jsonBody);
-                pilaDeBultos.agregarBulto(bulto);
+                _pilaDeBultosService.agregarBulto(bulto);
                 return "ok";
             }
             catch (Exception e)

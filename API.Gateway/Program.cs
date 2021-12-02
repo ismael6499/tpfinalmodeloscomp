@@ -8,7 +8,7 @@ namespace API.Gateway
 {
     class Program
     {
-        private static IConfiguration configuration;
+        public static IConfiguration configuration;
 
         static void Main(string[] args)
         {

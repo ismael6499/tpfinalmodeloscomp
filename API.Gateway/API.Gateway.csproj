@@ -16,14 +16,17 @@
       <PackageReference Include="Microsoft.Owin.Hosting" Version="4.2.0" />
       <PackageReference Include="Nancy" Version="2.0.0" />
       <PackageReference Include="Nancy.Owin" Version="2.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="Owin" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="System.ComponentModel.DataAnnotations" />
       <Reference Include="System.Net.Http" />
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="obj\project.packagespec.json" />
       <None Remove="appsettings.json" />
       <Content Include="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>

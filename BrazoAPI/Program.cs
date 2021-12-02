@@ -7,13 +7,13 @@ namespace BrazoAPI
     class Program
     {
         public static IConfiguration configuration;
+        public static BrazoService brazoService;
 
         static void Main(string[] args)
         {
             configuration = CreateConfiguration(args);
-
-            Brazo brazo = new Brazo();
-            brazo.init(configuration);
+            brazoService = new BrazoService();
+            brazoService.init(configuration);
         }
 
        

@@ -1,8 +1,8 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using PrensaAPI.Data;
 using WebAppGUI;
+using WebAppGUI.Data;
 
 namespace Data
 {

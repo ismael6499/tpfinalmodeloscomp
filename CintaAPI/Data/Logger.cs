@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using CintaAPI.Modelos;
 
 namespace CintaAPI.Data
 {
@@ -95,8 +96,8 @@ namespace CintaAPI.Data
 
             SqlParameter[] sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@componente", componente);
-            sqlParameters[1] = new SqlParameter("@description", description);
-            sqlParameters[2] = new SqlParameter("@type", "Debug");
+            sqlParameters[1] = new SqlParameter("@descripcion", description);
+            sqlParameters[2] = new SqlParameter("@tipo", "Debug");
             Escribir("writeLog",sqlParameters);
         }
         
@@ -106,8 +107,8 @@ namespace CintaAPI.Data
 
             SqlParameter[] sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@componente", componente);
-            sqlParameters[1] = new SqlParameter("@description", description);
-            sqlParameters[2] = new SqlParameter("@type", "Error");
+            sqlParameters[1] = new SqlParameter("@descripcion", description);
+            sqlParameters[2] = new SqlParameter("@tipo", "Error");
             Escribir("writeLog",sqlParameters);
         }
          
@@ -118,9 +119,19 @@ namespace CintaAPI.Data
 
              SqlParameter[] sqlParameters = new SqlParameter[3];
              sqlParameters[0] = new SqlParameter("@componente", componente);
-             sqlParameters[1] = new SqlParameter("@description", msjError);
-             sqlParameters[2] = new SqlParameter("@type", "Error");
+             sqlParameters[1] = new SqlParameter("@descripcion", msjError);
+             sqlParameters[2] = new SqlParameter("@tipo", "Error");
              Escribir("writeLog", sqlParameters);
+         }
+         
+         public void SaveBultoLog(Bulto bulto)
+         {
+             SqlParameter[] sqlParameters = new SqlParameter[4];
+             sqlParameters[0] = new SqlParameter("@globalid", bulto.GlobalId);
+             sqlParameters[1] = new SqlParameter("@descripcion", bulto.Descripcion);
+             sqlParameters[2] = new SqlParameter("@fecha", bulto.Fecha);
+             sqlParameters[3] = new SqlParameter("@estado", bulto.Estado);
+             Escribir("saveBultoLog", sqlParameters);
          }
     }
 }

@@ -1,18 +1,21 @@
+﻿using System;
 using System.Collections.Generic;
-using PilaDeBultosAPI.Data;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace PilaDeBultosAPI
+namespace PilaDeBultosAPI.Modelos
 {
-    public class PilaDeBultos
+    public class PilaDeBultos : Entidad
     {
-        public List<Bulto> Bultos { get; } = new List<Bulto>();
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Url { get; set; }
 
-        public void agregarBulto(Bulto bulto)
-        {
-            Bultos.Add(bulto);
-            Logger.GetInstance().WriteLog($"Bulto {bulto.GlobalId} agregado a la pila de bultos");
-        }
 
-        
+
+        public List<Bulto> Bultos { get; set; }
+
     }
 }

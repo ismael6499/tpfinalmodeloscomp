@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebAppGUI.Modelos.Log>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bitacora</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Componente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Componente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

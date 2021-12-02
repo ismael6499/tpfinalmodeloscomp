@@ -13,11 +13,9 @@ namespace WebAppGUI.Modelos
         [Required]
         public string Url { get; set; }
 
-        public bool Conectado { get; set; }
 
         public bool Encendido { get; set; }
 
-        public DateTime UltimaActividad { get; set; }
 
 
     }
