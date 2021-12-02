@@ -81,4 +81,9 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+.center-all {
+    display: flex;
+    justify-content: center;
+}
+
 

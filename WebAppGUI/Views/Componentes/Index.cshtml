@@ -4,39 +4,79 @@
 
 }
 
-<div class="row center-block">
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Cintas", "Index", "Cinta")
-        </button>
-    </div>
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Brazos", "Index", "Brazo")
-        </button>
-    </div>
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Prensas", "Index", "Prensa")
-        </button>
-    </div>
-</div>
-<div class="row center-block">
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Pila de Bultos", "Index", "PilaDeBultos")
-        </button>
-    </div>
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Sensor Pasivo", "Index", "SensorPasivo")
-        </button>
-    </div>
+<style>
+    .card {
+        margin: 5px 10px;
+    }
 
-    <div class="col-md-3">
-        <button style="margin-bottom: 30px">
-            @Html.ActionLink("Sensor Activo", "Index", "SensorActivo")
-        </button>
-    </div>
+    .card-img-top {
+        padding: 75px;
+    }
+</style>
 
+<div class="container pt-5">
+    <div class="row center-block center-all">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1404/1404588.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Cintas</h5>
+                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                <button class="btn btn-primary btn-block">
+                    @Html.ActionLink("Ver mas", "Index", "Cinta")
+                </button>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1404/1404605.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Brazos</h5>
+                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                <button class="btn btn-primary btn-block">
+                    @Html.ActionLink("Ver mas", "Index", "Brazo")
+                </button>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1404/1404596.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Prensa</h5>
+                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                <button class="btn btn-block btn-primary">
+                    @Html.ActionLink("Ver mas", "Index", "Prensa")
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row center-block center-all mt-5">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1404/1404585.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Pila de bultos</h5>
+                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                <button class="btn btn-block btn-primary">
+                    @Html.ActionLink("Ver mas", "Index", "PilaDeBultos")
+                </button>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1404/1404579.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Sensor activo</h5>
+                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                <button class="btn btn-block btn-primary">
+                    @Html.ActionLink("Ver mas", "Index", "SensorActivo")
+                </button>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1404/1404589.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Prensa</h5>
+                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                <button class="btn btn-block btn-primary">
+                    @Html.ActionLink("Ver mas", "Index", "SensorPasivo")
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
