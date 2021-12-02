@@ -1,0 +1,36 @@
+@model dynamic
+
+@{
+
+}
+
+<div class="row center-block">
+    <div class="col-md-3">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Cintas", "Index", "Cinta")
+        </button>
+    </div>
+    <div class="col-md-3">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Brazos", "PonerBulto", "Home")
+        </button>
+    </div>
+    <div class="col-md-3">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Prensas", "PonerBulto", "Home")
+        </button>
+    </div>
+</div>
+<div class="row center-block">
+    <div class="col-md-3">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Pila de Bultos", "PonerBulto", "Home")
+        </button>
+    </div>
+    <div class="col-md-3">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Sensores", "PonerBulto", "Home")
+        </button>
+    </div>
+</div>
+

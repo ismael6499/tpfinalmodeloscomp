@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  webappgui:
+    image: ${DOCKER_REGISTRY-}webappgui
+    build:
+      context: .
+      dockerfile: WebAppGUI/Dockerfile

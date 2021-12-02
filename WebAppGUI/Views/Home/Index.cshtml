@@ -1,0 +1,31 @@
+﻿@{
+    string response = (string)ViewData["response"];
+}
+
+
+<div style="margin: 1.5em 0">
+    <div class="col-md-12">
+    <img class="img-fluid center-block" src="imagen-brazo.jpg"/>
+    </div>
+</div>
+
+<div class="row center-block">
+    <div class="col-md-4">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Componentes", "Index", "Componentes")
+        </button>
+    </div>
+    <div class="col-md-4">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Gráficos", "Index", "Graficos")
+        </button>
+    </div>
+    <div class="col-md-4">
+        <button style="margin-bottom: 30px">
+            @Html.ActionLink("Bitácora", "Index", "Bitacora")
+        </button>
+    </div>
+</div>
+
+
+

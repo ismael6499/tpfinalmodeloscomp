@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebAppGUI.Modelos.Cinta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Cintas</h1>
+
+<p>
+    <a asp-action="Create">Crear Cinta</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Conectado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Encendido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UltimaActividad)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Conectado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Encendido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UltimaActividad)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { item.Id }) |
+                @Html.ActionLink("Detalle", "Details", new { item.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
