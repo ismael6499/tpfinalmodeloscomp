@@ -24,7 +24,6 @@ namespace WebAppGUI.DataMapper
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
             sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("agregar", sqlParameters);
         }
@@ -36,9 +35,8 @@ namespace WebAppGUI.DataMapper
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
             sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Encendido", model.Encendido);
-            sqlParameters[5] = new SqlParameter("@Libre", model.Libre);
-            sqlParameters[6] = new SqlParameter("@UltimaActividad", model.UltimaActividad);
+            sqlParameters[4] = new SqlParameter("@Libre", model.Libre);
+            sqlParameters[5] = new SqlParameter("@UltimaActividad", model.UltimaActividad);
 
             db.Escribir("agregar", sqlParameters);
         }
@@ -55,7 +53,6 @@ namespace WebAppGUI.DataMapper
                 SensorPasivo.Nombre = fila["Nombre"].ToString();
                 SensorPasivo.Url= fila["Url"].ToString();
                 SensorPasivo.Conectado = (bool) fila["Conectado"];
-                SensorPasivo.Encendido = (bool) fila["Encendido"];
                 SensorPasivo.Libre = (bool) fila["Libre"];
                 SensorPasivo.UltimaActividad =  DateTime.Parse(fila["UltimaActividad"].ToString());
                 lista.Add(SensorPasivo);
@@ -77,7 +74,6 @@ namespace WebAppGUI.DataMapper
                 SensorPasivo.Nombre = fila["Nombre"].ToString();
                 SensorPasivo.Url= fila["Url"].ToString();
                 SensorPasivo.Conectado = (bool) fila["Conectado"];
-                SensorPasivo.Encendido = (bool) fila["Encendido"];
                 SensorPasivo.Libre = (bool) fila["Libre"];
                 SensorPasivo.UltimaActividad =  DateTime.Parse(fila["UltimaActividad"].ToString());
                 return SensorPasivo;

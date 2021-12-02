@@ -20,24 +20,22 @@ namespace WebAppGUI.DataMapper
 
         public void Agregar(PilaDeBultos model)
         {
-            var sqlParameters = new SqlParameter[4];
+            var sqlParameters = new SqlParameter[3];
             sqlParameters[0] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[1] = new SqlParameter("@Url", model.Url);
             sqlParameters[2] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[3] = new SqlParameter("@Encendido", model.Encendido);
 
             db.Escribir("agregar", sqlParameters);
         }
 
         public void Actualizar(PilaDeBultos model)
         {
-            var sqlParameters = new SqlParameter[6];
+            var sqlParameters = new SqlParameter[5];
             sqlParameters[0] = new SqlParameter("@Id", model.Id);
             sqlParameters[1] = new SqlParameter("@Nombre", model.Nombre);
             sqlParameters[2] = new SqlParameter("@Url", model.Url);
             sqlParameters[3] = new SqlParameter("@Conectado", model.Conectado);
-            sqlParameters[4] = new SqlParameter("@Encendido", model.Encendido);
-            sqlParameters[5] = new SqlParameter("@UltimaActividad", model.UltimaActividad);
+            sqlParameters[4] = new SqlParameter("@UltimaActividad", model.UltimaActividad);
 
             db.Escribir("agregar", sqlParameters);
         }
@@ -54,7 +52,6 @@ namespace WebAppGUI.DataMapper
                 PilaDeBultos.Nombre = fila["Nombre"].ToString();
                 PilaDeBultos.Url= fila["Url"].ToString();
                 PilaDeBultos.Conectado = (bool) fila["Conectado"];
-                PilaDeBultos.Encendido = (bool) fila["Encendido"];
                 PilaDeBultos.UltimaActividad =  DateTime.Parse(fila["UltimaActividad"].ToString());
                 lista.Add(PilaDeBultos);
             }
@@ -75,7 +72,6 @@ namespace WebAppGUI.DataMapper
                 PilaDeBultos.Nombre = fila["Nombre"].ToString();
                 PilaDeBultos.Url= fila["Url"].ToString();
                 PilaDeBultos.Conectado = (bool) fila["Conectado"];
-                PilaDeBultos.Encendido = (bool) fila["Encendido"];
                 PilaDeBultos.UltimaActividad =  DateTime.Parse(fila["UltimaActividad"].ToString());
                 return PilaDeBultos;
             }

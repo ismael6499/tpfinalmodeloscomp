@@ -66,8 +66,10 @@ namespace WebAppGUI.Controllers
                 mapper.Actualizar(cinta);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
+                ModelState.AddModelError("",e.Message);
+
                 return View();
             }
         }
@@ -86,8 +88,10 @@ namespace WebAppGUI.Controllers
                 mapper.Eliminar(cinta);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
+                ModelState.AddModelError("",e.Message);
+
                 return View();
             }
         }
